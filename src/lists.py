@@ -101,7 +101,18 @@ def keep(x: DLList[T], p: Callable[[T], bool]) -> None:
     >>> print(x)
     [2, 4]
     """
+    link = x.head.next # definer link, som vi står ved som i str
+    dummy = x.head  # x.head er vores dummy
+    while link is not dummy:
+        if p(link.val) is not True: 
+            remove_link(link)
+        link = link.next # flytter ét link til højre. 
+    return x      
     ...
+
+#x = DLList([1, 2, 3, 4, 5])
+#keep(x, lambda a: a % 2 == 0)
+#print(keep(x, lambda a: a % 2 == 0))
 
 
 def reverse(x: DLList[T]) -> None:
@@ -113,7 +124,18 @@ def reverse(x: DLList[T]) -> None:
     >>> print(x)
     [5, 4, 3, 2, 1]
     """
+    dummy = x.head.prev
+    link = x.head.next
+    while link is not dummy:
+        insert_after(dummy,link.val)
+        remove_link(link)
+        link = link.next
+    return x
+    
     ...
+#x = DLList([1, 2, 3, 4, 5])
+#reverse(x)
+#print(x)
 
 
 def sort(x: DLList[S]) -> None:
@@ -125,4 +147,17 @@ def sort(x: DLList[S]) -> None:
     >>> print(x)
     [1, 3, 4, 5, 6, 12]
     """
+    dummy = x.head.prev
+    link = x.head.next
+    while link is not dummy:
+        if link.val > link.next.val:
+            remove_link(link)
+            insert_after(dummy, link.val)
+        link = link.next
+            
+    
     ...
+
+x = DLList([1, 3, 12, 6, 4, 5])
+sort(x)
+print(x)
