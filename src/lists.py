@@ -107,7 +107,7 @@ def keep(x: DLList[T], p: Callable[[T], bool]) -> None:
         if p(link.val) is not True: 
             remove_link(link)
         link = link.next # flytter ét link til højre. 
-    return x      
+
     ...
 
 #x = DLList([1, 2, 3, 4, 5])
@@ -130,8 +130,8 @@ def reverse(x: DLList[T]) -> None:
         insert_after(dummy,link.val)
         remove_link(link)
         link = link.next
-    return x
-    
+
+
     ...
 #x = DLList([1, 2, 3, 4, 5])
 #reverse(x)
@@ -158,6 +158,6 @@ def sort(x: DLList[S]) -> None:
     
     ...
 
-x = DLList([1, 3, 12, 6, 4, 5])
-sort(x)
-print(x)
+#x = DLList([1, 3, 12, 6, 4, 5])
+#sort(x)
+#print(x)
