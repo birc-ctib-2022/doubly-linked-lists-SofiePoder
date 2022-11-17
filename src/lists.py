@@ -90,7 +90,7 @@ class DLList(Generic[T]):
     __repr__ = __str__  # because why not?
 
 
-# Exercises
+
 
 def keep(x: DLList[T], p: Callable[[T], bool]) -> None:
     """
@@ -155,7 +155,7 @@ def sort(x: DLList[S]) -> None:
             insert_after(dummy, link.val)
         link = link.next
             
-    
+
     ...
 
 #x = DLList([1, 3, 12, 6, 4, 5])
