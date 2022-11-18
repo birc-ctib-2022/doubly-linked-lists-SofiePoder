@@ -137,6 +137,15 @@ def reverse(x: DLList[T]) -> None:
 #reverse(x)
 #print(x)
 
+def is_it_sorted(x: DLList(S)) -> bool:
+    link = x.head.next
+    while link.next != x.head:
+        if link.val < link.next.val:
+            link = link.next
+        else: 
+            return False
+    return True
+
 
 def sort(x: DLList[S]) -> None:
     """
@@ -149,7 +158,7 @@ def sort(x: DLList[S]) -> None:
     """
     end = x.head.prev
     link = x.head.next
-    while link is not end:
+    while is_it_sorted(x) == False:
         if link.val > end.val:
             remove_link(link)
             insert_after(end, link.val)
