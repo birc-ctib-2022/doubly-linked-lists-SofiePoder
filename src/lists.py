@@ -90,7 +90,7 @@ class DLList(Generic[T]):
     __repr__ = __str__  # because why not?
 
 
-# Exercises
+
 
 def keep(x: DLList[T], p: Callable[[T], bool]) -> None:
     """
@@ -101,7 +101,18 @@ def keep(x: DLList[T], p: Callable[[T], bool]) -> None:
     >>> print(x)
     [2, 4]
     """
+    link = x.head.next # definer link, som vi står ved som i str
+    dummy = x.head  # x.head er vores dummy
+    while link is not dummy:
+        if p(link.val) is not True: 
+            remove_link(link)
+        link = link.next # flytter ét link til højre. 
+
     ...
+
+#x = DLList([1, 2, 3, 4, 5])
+#keep(x, lambda a: a % 2 == 0)
+#print(keep(x, lambda a: a % 2 == 0))
 
 
 def reverse(x: DLList[T]) -> None:
@@ -113,7 +124,27 @@ def reverse(x: DLList[T]) -> None:
     >>> print(x)
     [5, 4, 3, 2, 1]
     """
+    end = x.head.prev
+    link = x.head.next
+    while link is not end:
+        insert_after(end,link.val)
+        remove_link(link)
+    link = link.next
+
+
     ...
+#x = DLList([1, 2, 3, 4, 5])
+#reverse(x)
+#print(x)
+
+def is_it_sorted(x: DLList[S]) -> bool:
+    link = x.head.next
+    while link.next != x.head:
+        if link.val < link.next.val:
+            link = link.next
+        else: 
+            return False
+    return True
 
 
 def sort(x: DLList[S]) -> None:
@@ -125,4 +156,19 @@ def sort(x: DLList[S]) -> None:
     >>> print(x)
     [1, 3, 4, 5, 6, 12]
     """
+    end = x.head.prev
+    link = x.head.next
+    while is_it_sorted(x) == False:
+        
+        if link.val > end.val:
+            remove_link(link)
+            insert_after(end, link.val)
+        elif link.val == end.val:
+            end = x.head.prev
+        link =link.next
+        
     ...
+
+x = DLList([1, 3, 12, 13, 4, 5])
+sort(x)
+print(x)
