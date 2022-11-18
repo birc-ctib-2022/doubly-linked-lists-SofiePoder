@@ -124,12 +124,12 @@ def reverse(x: DLList[T]) -> None:
     >>> print(x)
     [5, 4, 3, 2, 1]
     """
-    dummy = x.head.prev
+    end = x.head.prev
     link = x.head.next
-    while link is not dummy:
-        insert_after(dummy,link.val)
+    while link is not end:
+        insert_after(end,link.val)
         remove_link(link)
-        link = link.next
+    link = link.next
 
 
     ...
@@ -147,17 +147,18 @@ def sort(x: DLList[S]) -> None:
     >>> print(x)
     [1, 3, 4, 5, 6, 12]
     """
-    dummy = x.head.prev
+    end = x.head.prev
     link = x.head.next
-    while link is not dummy:
-        if link.val > link.next.val:
+    while link is not end:
+        if link.val > end.val:
             remove_link(link)
-            insert_after(dummy, link.val)
+            insert_after(end, link.val)
         link = link.next
-            
-
+        if link.val == end.val:
+            end = x.head.prev
+        
     ...
 
-#x = DLList([1, 3, 12, 6, 4, 5])
-#sort(x)
-#print(x)
+x = DLList([1, 3, 12, 13, 4, 5])
+sort(x)
+print(x)
